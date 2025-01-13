@@ -113,3 +113,45 @@ criterion = nn.BCELoss()
 D_opt = torch.optim.Adam(D.parameters(), lr=0.0001, betas=(0.5, 0.999))
 G_opt = torch.optim.Adam(G.parameters(), lr=0.0001, betas=(0.5, 0.999))
 
+max_epoch = 30
+step = 0 
+n_critic = 1
+n_noise = 100
+
+D_labels = torch.ones([batch_size, 1]).to(DEVICE)
+D_fakes = torch.zeros([batch_size, 1]).to(DEVICE)
+
+for epoch in range(max_epoch):
+    for idx, (images, labels) in enumerate(data_loader):
+        x= images.to(DEVICE)
+        x_outputs = D(x)
+        D_x_loss = criterion(x_outputs, D_labels)
+
+        z = torch.randn(batch_size, n_noise).to(DEVICE)
+        z_outputs = D(G(z))
+        D_z_loss = criterion(z_outputs, D_fakes)
+
+        D_loss = D_x_loss + D_z_loss
+        D_loss.backward()
+        D_opt.step()
+
+        if step % n_critic == 0:
+            # Training Generator
+            z = torch.randn(batch_size, n_noise).to(DEVICE)
+            z_outputs = D(G(z))
+            G_loss = criterion(z_outputs, D_labels)
+
+            D.zero_grad()
+            G.zero_grad()
+            G_loss.backward()
+            G_opt.step()        
+
+        if step % 500 == 0:
+            print('Epoch: {}/{}, Step: {}, D Loss: {}, G Loss: {}'.format(epoch, max_epoch, step, D_loss.item(), G_loss.item()))
+        
+        if step % 1000 == 0:
+            G.eval()
+            img = get_sample_image(G, n_noise)
+            imsave('samples/{}_step{}.jpg'.format(MODEL_NAME, str(step).zfill(3)), img, cmap='gray')
+            G.train()
+        step += 1
