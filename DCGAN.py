@@ -31,4 +31,33 @@ def get_sample_image(G, n_noise):
         img[j*28:(j+1)*28] = np.concatenate([x for x in result[j*10:(j+1)*10]], axis=1)
     return img
 
+class Discriminator(nn.Module):
+    def __init__(self, in_channel=1, num_classes=1):
+        super(Discriminator, self).__init__()
+        self.conv = nn.Sequential(
+            # 28 -> 14
+            nn.Conv2d(in_channel, 512, 3, stride=2, padding=1, bias=False),
+            nn.BatchNorm2d(512),
+            nn.LeakyReLU(0.2),
+            # 14 -> 7
+            nn.Conv2d(512, 256, 3, stride=2, padding=1, bias=False),
+            nn.BatchNorm2d(256),
+            nn.LeakyReLU(0.2),
+            # 7 -> 4
+            nn.Conv2d(256, 128 , 3, stride=2, padding=1, bias=False),
+            nn.BatchNorm2d(512),
+            nn.LeakyReLU(0.2),
+            nn.AvgPool2d(4),
+        )
+        self.fc = nn.Sequential(
+            nn.Linear(128, 1),
+            nn.Sigmoid(),
+        )
+
+    def forward(self, x, y=None ):
+        x = self.conv(x)
+        y_ = y_.view(x.size(0), -1)
+        y_ = self.fc(y_)
+        return y_
+
 
