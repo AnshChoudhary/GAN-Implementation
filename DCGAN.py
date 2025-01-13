@@ -61,3 +61,55 @@ class Discriminator(nn.Module):
         return y_
 
 
+class Generator(nn.Module):
+    """
+        Convolutional Generator for MNIST
+    """
+    def __init__(self, input_size=100, num_classes=784):
+        super(Generator, self).__init__()
+        self.fc = nn.Sequential(
+            nn.Linear(input_size, 4*4*512),
+            nn.ReLU(),
+        )
+        self.conv = nn.Sequential(
+            # input: 4 by 4, output: 7 by 7
+            nn.ConvTranspose2d(512, 256, 3, stride=2, padding=1, bias=False),
+            nn.BatchNorm2d(256),
+            nn.ReLU(),
+            # input: 7 by 7, output: 14 by 14
+            nn.ConvTranspose2d(256, 128, 4, stride=2, padding=1, bias=False),
+            nn.BatchNorm2d(128),
+            nn.ReLU(),
+            # input: 14 by 14, output: 28 by 28
+            nn.ConvTranspose2d(128, 1, 4, stride=2, padding=1, bias=False),
+            nn.Tanh(),
+        )
+        
+    def forward(self, x, y=None):
+        x = x.view(x.size(0), -1)
+        y_ = self.fc(x)
+        y_ = y_.view(y_.size(0), 512, 4, 4)
+        y_ = self.conv(y_)
+        return y_
+    
+D = Discriminator().to(DEVICE)
+G = Generator().to(DEVICE)
+D.load_state_dict('D_dc.pkl')
+G.load_state_dict('G_dc.pkl')
+
+transform = transforms.Compose([transforms.ToTensor(),
+                                transforms.Normalize(mean=[0.5],
+                                std=[0.5])]
+)
+
+mnist = datasets.MNIST(root='../data/', train=True, transform=transform, download=True)
+
+batch_size = 64
+
+data_loader = DataLoader(dataset=mnist, batch_size=batch_size, shuffle=True, drop_last=True)
+
+criterion = nn.BCELoss()
+
+D_opt = torch.optim.Adam(D.parameters(), lr=0.0001, betas=(0.5, 0.999))
+G_opt = torch.optim.Adam(G.parameters(), lr=0.0001, betas=(0.5, 0.999))
+
