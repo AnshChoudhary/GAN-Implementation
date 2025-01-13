@@ -161,3 +161,9 @@ imshow(get_sample_image(G, n_noise), cmap='gray')
 
 def save_checkpoint(state, file_name='checkpoint.pth.tar'):
     torch.save(state, file_name)
+
+# Saving params.
+# torch.save(D.state_dict(), 'D_c.pkl')
+# torch.save(G.state_dict(), 'G_c.pkl')
+save_checkpoint({'epoch': epoch + 1, 'state_dict':D.state_dict(), 'optimizer' : D_opt.state_dict()}, 'D_dc.pth.tar')
+save_checkpoint({'epoch': epoch + 1, 'state_dict':G.state_dict(), 'optimizer' : G_opt.state_dict()}, 'G_dc.pth.tar')
