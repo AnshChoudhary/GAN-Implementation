@@ -155,3 +155,9 @@ for epoch in range(max_epoch):
             imsave('samples/{}_step{}.jpg'.format(MODEL_NAME, str(step).zfill(3)), img, cmap='gray')
             G.train()
         step += 1
+
+G.eval()
+imshow(get_sample_image(G, n_noise), cmap='gray')
+
+def save_checkpoint(state, file_name='checkpoint.pth.tar'):
+    torch.save(state, file_name)
