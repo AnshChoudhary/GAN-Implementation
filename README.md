@@ -59,3 +59,28 @@ The basic GAN architecture consists of fully connected layers in both the genera
 [View Implementation](./VanillaGAN.ipynb)
 
 ---
+
+### 2. **Deep Convolutional GAN (DCGAN)**
+DCGANs introduce convolutional layers into GANs, enabling them to handle high-dimensional data such as images.
+
+**Key Features:**
+- Use of convolutional layers in both the generator and discriminator.
+- Batch normalization to stabilize training.
+- ReLU activation in the generator and Leaky ReLU in the discriminator.
+- Produces higher quality images compared to Vanilla GAN.
+
+[View Implementation](./DCGAN.ipynb)
+
+---
+
+### 3. **Conditional GAN (CGAN)**
+CGANs extend the GAN framework by conditioning the generation process on auxiliary information (e.g., class labels).
+
+**Key Features:**
+- Generator and discriminator receive both noise and class labels as inputs.
+- Enables controlled generation of samples corresponding to specific labels.
+- Widely used for tasks like image-to-image translation and text-to-image synthesis.
+
+[View Implementation](./Conditional-GAN.ipynb)
+
+---
