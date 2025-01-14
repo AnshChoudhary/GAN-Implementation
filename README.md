@@ -1,13 +1,16 @@
-# GAN Implementation
+# Generative Adversarial Networks (GANs) Implementation
 
-## GAN
+## Overview
 
-Reference: https://arxiv.org/pdf/1406.2661.pdf
+Generative Adversarial Networks (GANs) are a class of machine learning frameworks designed to generate synthetic data that mimics real data. Introduced by Ian Goodfellow et al. in 2014, GANs consist of two neural networks:
 
-## Conditional GAN
+1. **Generator (G):** The generator creates synthetic data samples.
+2. **Discriminator (D):** The discriminator evaluates whether the samples are real or generated.
 
-Reference: https://arxiv.org/pdf/1411.1784.pdf
+The two networks compete in a zero-sum game:
+- The generator tries to fool the discriminator into classifying its outputs as real.
+- The discriminator learns to distinguish real samples from fake ones.
 
-## DCGAN
+This adversarial process helps the generator improve over time, creating highly realistic data.
 
-Reference: https://arxiv.org/pdf/1511.06434.pdf
+---
