@@ -97,3 +97,23 @@ Install the dependencies using:
 ```bash
 pip install torch torchvision numpy matplotlib
 ```
+
+## Usage
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/AnshChoudhary/GAN-Implementation.git
+```
+
+2. Navigate to the repository:
+
+```bash
+cd GAN-Implementation
+```
+
+3. Open the desired notebook in Jupyter Notebook or JupyterLab:
+
+```bash
+jupyter notebook VanillaGAN.ipynb
+```
