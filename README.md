@@ -14,3 +14,17 @@ The two networks compete in a zero-sum game:
 This adversarial process helps the generator improve over time, creating highly realistic data.
 
 ---
+
+## Repository Structure
+This repository contains implementations of three types of GAN architectures:
+
+1. **Vanilla GAN**
+2. **Deep Convolutional GAN (DCGAN)**
+3. **Conditional GAN (CGAN)**
+
+Each implementation is provided in a separate Jupyter Notebook:
+- `VanillaGAN.ipynb`: Basic implementation of a GAN.
+- `DCGAN.ipynb`: Implementation of a convolutional GAN for generating high-quality images.
+- `Conditional-GAN.ipynb`: GAN conditioned on labels for controlled data generation.
+
+---
