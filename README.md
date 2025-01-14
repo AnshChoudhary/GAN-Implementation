@@ -117,3 +117,22 @@ cd GAN-Implementation
 ```bash
 jupyter notebook VanillaGAN.ipynb
 ```
+
+## Applications of GANs
+- **Image generation:** Generating realistic faces, artworks, and other synthetic images.
+- **Image-to-image translation:** Tasks like style transfer, super-resolution, and domain adaptation.
+- **Data augmentation:** Enhancing datasets for machine learning models.
+- **Video generation and prediction:** Synthesizing realistic video sequences or predicting future frames.
+- **Anomaly detection:** Detecting fraud or other outliers by modeling normal data distributions.
+
+---
+
+## References
+1. Goodfellow, I., et al. (2014). Generative Adversarial Networks. [arXiv:1406.2661](https://arxiv.org/abs/1406.2661)
+2. Radford, A., et al. (2015). Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks. [arXiv:1511.06434](https://arxiv.org/abs/1511.06434)
+3. Mirza, M., & Osindero, S. (2014). Conditional Generative Adversarial Nets. [arXiv:1411.1784](https://arxiv.org/abs/1411.1784)
+
+---
+
+## Acknowledgments
+This repository was created as a comprehensive guide to GAN architectures and their implementations. Contributions and suggestions are welcome!
