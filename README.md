@@ -84,3 +84,16 @@ CGANs extend the GAN framework by conditioning the generation process on auxilia
 [View Implementation](./Conditional-GAN.ipynb)
 
 ---
+
+## Requirements
+To run the notebooks, you will need the following Python packages:
+
+- `torch`
+- `torchvision`
+- `numpy`
+- `matplotlib`
+
+Install the dependencies using:
+```bash
+pip install torch torchvision numpy matplotlib
+```
