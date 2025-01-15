@@ -21,11 +21,13 @@ This repository contains implementations of three types of GAN architectures:
 1. **Vanilla GAN**
 2. **Deep Convolutional GAN (DCGAN)**
 3. **Conditional GAN (CGAN)**
+4. **Wasserstain GAN (WGAN)**
 
 Each implementation is provided in a separate Jupyter Notebook:
 - `VanillaGAN.ipynb`: Basic implementation of a GAN.
 - `DCGAN.ipynb`: Implementation of a convolutional GAN for generating high-quality images.
 - `Conditional-GAN.ipynb`: GAN conditioned on labels for controlled data generation.
+- `W-GAN.ipynb`: Implementation of Wasserstein GAN. 
 
 ---
 
@@ -145,6 +147,7 @@ jupyter notebook VanillaGAN.ipynb
 1. Goodfellow, I., et al. (2014). Generative Adversarial Networks. [arXiv:1406.2661](https://arxiv.org/abs/1406.2661)
 2. Radford, A., et al. (2015). Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks. [arXiv:1511.06434](https://arxiv.org/abs/1511.06434)
 3. Mirza, M., & Osindero, S. (2014). Conditional Generative Adversarial Nets. [arXiv:1411.1784](https://arxiv.org/abs/1411.1784)
+4. 
 
 ---
 
