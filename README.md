@@ -147,7 +147,7 @@ jupyter notebook VanillaGAN.ipynb
 1. Goodfellow, I., et al. (2014). Generative Adversarial Networks. [arXiv:1406.2661](https://arxiv.org/abs/1406.2661)
 2. Radford, A., et al. (2015). Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks. [arXiv:1511.06434](https://arxiv.org/abs/1511.06434)
 3. Mirza, M., & Osindero, S. (2014). Conditional Generative Adversarial Nets. [arXiv:1411.1784](https://arxiv.org/abs/1411.1784)
-4. 
+4. Arjovsky, M., Chintala, S., & Bottou, L. (2017). Wasserstein GAN. [arXiv:1701.07875](https://arxiv.org/pdf/1701.07875)
 
 ---
 
