@@ -85,6 +85,20 @@ CGANs extend the GAN framework by conditioning the generation process on auxilia
 
 ---
 
+### 4. **Wasserstein GAN (WGAN)**  
+Wasserstein GANs improve upon the original GAN framework by addressing issues like mode collapse and training instability using the Wasserstein distance as a new loss function.
+
+**Key Features:**  
+- Replaces the standard GAN loss with the Wasserstein loss, which provides a more meaningful measure of the distance between the real and generated data distributions.  
+- Does not require the discriminator to output probabilities; instead, it outputs a critic score.  
+- Uses weight clipping or gradient penalty (in WGAN-GP) to enforce the Lipschitz constraint.  
+- Improves training stability and makes convergence easier to interpret.
+
+[View Implementation](./W-GAN.ipynb)
+
+
+---
+
 ## Requirements
 To run the notebooks, you will need the following Python packages:
 
