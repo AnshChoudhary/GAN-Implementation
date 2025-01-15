@@ -150,3 +150,60 @@ def n_critic(step, nc=2):
 D_labels = torch.ones([batch_size, 1]).to(DEVICE) # Discriminator Label to real
 D_fakes = torch.zeros([batch_size, 1]).to(DEVICE) # Discriminator Label to fake
 
+for epoch in range(max_epoch):
+    for idx, (images, labels) in enumerate(data_loader):
+                   
+        # Training Discriminator
+        x = images.to(DEVICE)
+        y = labels.view(batch_size, 1)
+        y = to_onehot(y).to(DEVICE)
+        x_outputs = D(x, y)
+
+        z = torch.randn(batch_size, n_noise).to(DEVICE)
+        z_outputs = D(G(z, y), y)
+        D_x_loss = torch.mean(x_outputs)
+        D_z_loss = torch.mean(z_outputs)
+        D_loss = D_z_loss - D_x_loss
+        
+        D.zero_grad()
+        D_loss.backward()
+        D_opt.step()
+        # Parameter(Weight) Clipping for K-Lipshitz constraint
+        for p in D.parameters():
+            p.data.clamp_(-0.01, 0.01)
+                    
+        if step % 1 == 0:
+            g_step += 1
+            # Training Generator
+            z = torch.randn(batch_size, n_noise).to(DEVICE)
+            z_outputs = D(G(z, y), y)
+            G_loss = -torch.mean(z_outputs)
+
+            D.zero_grad()
+            G.zero_grad()
+            G_loss.backward()
+            G_opt.step()
+            
+        if step % 500 == 0:
+            print('Epoch: {}/{}, Step: {}, D Loss: {}, G Loss: {}'.format(epoch, max_epoch, step, D_loss.item(), G_loss.item()))
+        
+        if step % 1000 == 0:
+            G.eval()
+            img = get_sample_image(G, n_noise)
+            imsave('samples/{}_step{}.jpg'.format(MODEL_NAME, str(step).zfill(3)), img, cmap='gray')
+            G.train()
+        step += 1
+
+
+# generation to image
+G.eval()
+imshow(get_sample_image(G, n_noise), cmap='gray')
+
+def save_checkpoint(state, file_name='checkpoint.pth.tar'):
+    torch.save(state, file_name)
+
+# Saving params.
+# torch.save(D.state_dict(), 'D_c.pkl')
+# torch.save(G.state_dict(), 'G_c.pkl')
+save_checkpoint({'epoch': epoch + 1, 'state_dict':D.state_dict(), 'optimizer' : D_opt.state_dict()}, 'D_w.pth.tar')
+save_checkpoint({'epoch': epoch + 1, 'state_dict':G.state_dict(), 'optimizer' : G_opt.state_dict()}, 'G_w.pth.tar')
