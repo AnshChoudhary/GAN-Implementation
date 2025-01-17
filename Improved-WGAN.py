@@ -141,3 +141,62 @@ step = 0
 n_noise = 100
 p_coeff = 10 # lambda
 n_critic = 5
+
+D_labels = torch.ones([batch_size, 1]).to(DEVICE) # Discriminator Label to real
+D_fakes = torch.zeros([batch_size, 1]).to(DEVICE) # Discriminator Label to fake
+
+if not os.path.exists('samples'):
+    os.makedirs('samples')
+
+for epoch in range(max_epoch):
+    for idx, (images, labels) in enumerate(data_loader):
+        D.zero_grad()
+        ## Training Discriminator
+        # Real data
+        x = images.to(DEVICE)
+        y = labels.view(batch_size, 1)
+        y = to_onehot(y).to(DEVICE)
+        
+        # Sampling
+        z = torch.randn(batch_size, n_noise).to(DEVICE)
+        x_fake = G(z, y)
+                
+        # Gradient Penalty (e.g. gradients w.r.t x_penalty)
+        eps = torch.rand(batch_size, 1, 1, 1).to(DEVICE) # x shape: (64, 1, 28, 28)
+        x_penalty = eps*x + (1-eps)*x_fake
+        x_penalty = x_penalty.view(x_penalty.size(0), -1)
+        p_outputs = D(x_penalty, y)
+        xp_grad = autograd.grad(outputs=p_outputs, inputs=x_penalty, grad_outputs=D_labels,
+                                create_graph=True, retain_graph=True, only_inputs=True)
+        grad_penalty = p_coeff * torch.mean(torch.pow(torch.norm(xp_grad[0], 2, 1) - 1, 2))
+        
+        # Wasserstein loss
+        x_outputs = D(x, y)
+        z_outputs = D(x_fake, y)
+        D_x_loss = torch.mean(x_outputs)
+        D_z_loss = torch.mean(z_outputs)
+        D_loss = D_z_loss - D_x_loss + grad_penalty
+        
+        D_loss.backward()
+        D_opt.step()        
+        if step % n_critic == 0:
+            D.zero_grad()
+            G.zero_grad()
+            # Training Generator
+            z = torch.randn(batch_size, n_noise).to(DEVICE)
+            z_outputs = D(G(z, y), y)
+            G_loss = -torch.mean(z_outputs)
+
+            G_loss.backward()
+            G_opt.step()
+        
+        if step % 500 == 0:
+            print('Epoch: {}/{}, Step: {}, D Loss: {}, G Loss: {}'.format(epoch, max_epoch, step, D_loss.item(), G_loss.item()))
+        
+        if step % 1000 == 0:
+            G.eval()
+            img = get_sample_image(G, n_noise)
+            imsave('samples/{}_step{:05d}.jpg'.format(MODEL_NAME, step), img, cmap='gray')
+            G.train()
+        step += 1
+
