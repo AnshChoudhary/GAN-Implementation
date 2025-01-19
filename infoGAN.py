@@ -178,8 +178,8 @@ class Generator(nn.Module):
 D = Discriminator().to(DEVICE)
 G = Generator().to(DEVICE)
 Q = Qrator().to(DEVICE)
-# D.load_state_dict('D_dc.pkl')
-# G.load_state_dict('G_dc.pkl')
+D.load_state_dict('D_dc.pkl')
+G.load_state_dict('G_dc.pkl')
 
 transform = transforms.Compose([transforms.ToTensor(),
                                 transforms.Normalize(mean=[0.5],
