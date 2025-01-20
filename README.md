@@ -98,6 +98,30 @@ Wasserstein GANs improve upon the original GAN framework by addressing issues li
 
 [View Implementation](./W-GAN.ipynb)
 
+---
+
+### 5. **Wasserstein GAN with Gradient Penalty (WGAN-GP)**  
+WGAN-GP enhances the Wasserstein GAN framework by addressing the limitations of weight clipping through the introduction of a gradient penalty.
+
+**Key Features:**  
+- Enforces the Lipschitz constraint using a gradient penalty rather than weight clipping, improving model performance and stability.  
+- Provides smoother convergence and alleviates issues with capacity underutilization in the discriminator.  
+- Widely used in high-resolution image generation tasks and applications requiring stable GAN training.
+
+[View Implementation](./WGAN-GP.ipynb)
+
+---
+
+### 6. **Information Maximizing GAN (InfoGAN)**  
+InfoGAN extends the GAN framework by maximizing the mutual information between a subset of latent variables and the generated data, enabling interpretable and disentangled representations.
+
+**Key Features:**  
+- Introduces latent variables with a meaningful structure (e.g., categorical or continuous) to control specific features of the generated data.  
+- Encourages disentanglement of representations, allowing controlled generation based on interpretable factors.  
+- Useful for tasks like style transfer, data clustering, and feature learning.
+
+[View Implementation](./InfoGAN.ipynb)
+
 
 ---
 
