@@ -24,10 +24,14 @@ This repository contains implementations of three types of GAN architectures:
 4. **Wasserstain GAN (WGAN)**
 
 Each implementation is provided in a separate Jupyter Notebook:
-- `VanillaGAN.ipynb`: Basic implementation of a GAN.
-- `DCGAN.ipynb`: Implementation of a convolutional GAN for generating high-quality images.
-- `Conditional-GAN.ipynb`: GAN conditioned on labels for controlled data generation.
-- `W-GAN.ipynb`: Implementation of Wasserstein GAN. 
+
+- **VanillaGAN.ipynb:** Basic implementation of a GAN.  
+- **DCGAN.ipynb:** Implementation of a convolutional GAN for generating high-quality images.  
+- **Conditional-GAN.ipynb:** GAN conditioned on labels for controlled data generation.  
+- **W-GAN.ipynb:** Implementation of Wasserstein GAN.  
+- **WGAN-GP.ipynb:** Wasserstein GAN with Gradient Penalty for improved training stability.  
+- **InfoGAN.ipynb:** Information Maximizing GAN for interpretable and disentangled representations.
+
 
 ---
 
