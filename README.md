@@ -22,6 +22,8 @@ This repository contains implementations of three types of GAN architectures:
 2. **Deep Convolutional GAN (DCGAN)**
 3. **Conditional GAN (CGAN)**
 4. **Wasserstain GAN (WGAN)**
+5. **Wasserstein GAN with Gradient Penalty (WGAN-GP)**
+6. **Information Maximizing GAN (InfoGAN)**
 
 Each implementation is provided in a separate Jupyter Notebook:
 
