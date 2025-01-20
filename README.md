@@ -101,6 +101,26 @@ Wasserstein GANs improve upon the original GAN framework by addressing issues li
 
 ---
 
+### Vanilla GAN
+<img src="/images/Vanilla-GAN.gif" width="200" height="200" />
+
+### Conditional GAN
+<img src="/images/Conditional-GAN.gif" width="200" height="200" />
+
+### DC GAN
+<img src="/images/Conditional-DCGAN.gif" width="200" height="200" />
+
+### WGAN-gp
+<img src="/images/WGAN-gp.gif" width="200" height="200" />
+
+### infoGAN w/ walking code 1
+<img src="/images/infoGAN_type1.jpg" width="200" height="200" />
+
+### infoGAN w/ walking code 2
+<img src="/images/infoGAN_type2.jpg" width="200" height="200" />
+
+---
+
 ## Requirements
 To run the notebooks, you will need the following Python packages:
 
